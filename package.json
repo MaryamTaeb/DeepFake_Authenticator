@@ -1,0 +1,26 @@
+{
+  "name": "pet-shop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.3.0"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.17.0",
+    "binaryjs": "^0.2.1",
+    "exif-js": "^2.3.0",
+    "flask": "^0.2.10",
+    "ipfs": "^0.66.1",
+    "ipfs-http-client": "^56.0.1-3a5d61d4.0"
+  }
+}
