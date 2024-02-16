@@ -93,7 +93,7 @@ App = {
     compareMetadata: function(metadataFromFile, metadataFromUserFile) {
         // This is a basic example comparing two objects property by property
         return Object.keys(metadataFromFile).every(key => 
-            metadataFromFile[key] === metadataFromUserFile[key]
+          (key !== 'make' && key !== 'model') && metadataFromFile[key] === metadataFromUserFile[key]
         );
     },
 
@@ -120,14 +120,22 @@ App = {
           }
         }
         reportText += '\nMetadata Comparison Result:\n';
-        if (App.compareMetadata(metadataFromUserFile, metadataFromFile)) {
+        const isMetadataMatch = App.compareMetadata(metadataFromFile, metadataFromUserFile);
+        console.log(isMetadataMatch)
+        if (isMetadataMatch == true) {
             reportText += '\nAll metadata matches.\n';
         } else {
             reportText += '\nSome metadata did not match:\n';
+            console.log(metadataFromFile)
+            console.log(metadataFromUserFile)
             Object.keys(metadataFromFile).forEach(key => {
-                if(metadataFromFile[key] !== metadataFromUserFile[key]) {
+              if (key !== 'make' && key !== 'model') {
+                if (metadataFromFile[key] !== metadataFromUserFile[key]) {
+                    console.log('expected', metadataFromFile[key])
+                    console.log('got', metadataFromUserFile)
                     reportText += `${key}: Expected ${metadataFromFile[key]}, got ${metadataFromUserFile[key]}\n`;
                 }
+            }
             });
         }
        
@@ -260,6 +268,7 @@ App = {
                                       model,
                                   };
                                   const isMetadataMatch = App.compareMetadata(metadataFromFile, metadataFromUserFile);
+                                  console.log(isMetadataMatch)
                                   if (isMetadataMatch) {
                                       console.log("Metadata matches, proceeding to upload...");
                                   } else {

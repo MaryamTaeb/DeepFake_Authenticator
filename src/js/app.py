@@ -29,8 +29,8 @@ def upload_image():
     description = request.form['description']
     
     # Load the saved model
-    DeepFake_efficientnet = load_model('/Users/maryam/starter_updated_copy/src/js/Pretrained Models/BaseEffecienNetB2ForEFFandRes.h5')
-    FakeNews_Bert = TFBertForSequenceClassification.from_pretrained('/Users/maryam/starter_updated_copy/src/js/Pretrained Models/bert_model')
+    DeepFake_efficientnet = load_model('/Users/maryam/Dissertation_Dapp/src/js/Pretrained Models/BaseEffecienNetB2ForEFFandRes.h5')
+    FakeNews_Bert = TFBertForSequenceClassification.from_pretrained('/Users/maryam/Dissertation_Dapp/src/js/Pretrained Models/bert_model')
     # Preprosessing evidence description
 
     # Removing suffixes from words
