@@ -31,6 +31,8 @@ This project proposes the use of blockchain-based decentralized federated learni
 - This step enables file retrieval through an HTTP web browser. Run `ipfs daemon` in your terminal.
   
   For more information, check out this [IPFS guide](https://flyingzumwalt.gitbooks.io/decentralized-web-primer/content/classical-web/lessons/local-gateway.html).
+- If you are facing any CORS Fetch Errors, it would be helpful to run the `ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["http://localhost:3002"]'
+ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "GET", "POST"]'` commands in your terminal.
 
 ### Step 3: Initialize Truffle Dapp
 
