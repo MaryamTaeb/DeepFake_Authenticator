@@ -4,12 +4,14 @@
 import re
 import cv2
 import numpy as np
+import ipfshttpclient
 import tensorflow as tf
 from nltk.stem import PorterStemmer
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS, cross_origin
 from tensorflow.keras.models import load_model
 from transformers import BertTokenizer, TFBertForSequenceClassification
+
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/upload-image": {"origins": "*"}})
@@ -88,6 +90,21 @@ def upload_image():
             'fake_news_prediction': probabilities_list,
             'fake_news_label': predicted_label,
             'predicted_value': predicted_value.tolist()}), 200
+    
+@app.route('/download_media/<ipfs_hash>', methods=['GET'])
+ 
+def download_media(ipfs_hash):
+    # Connect to the local IPFS node
+    client = ipfshttpclient.connect('/ip4/127.0.0.1/tcp/5001')   
+    # Specify the directory where you want to temporarily store the downloaded file
+    temp_download_path = '/Users/maryam/Dissertation_Dapp/src/Downloaded_Evidence'  
+    # This will download the file to the specified directory
+    client.get(ipfs_hash, temp_download_path)  
+    # Construct the file path for the downloaded file
+    file_path = f'{temp_download_path}/{ipfs_hash}'
+    # Send the file as a response to the client
+    # Flask will automatically handle setting the correct content type and cleanup
+    return send_file(file_path, as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
